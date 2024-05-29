@@ -1,12 +1,13 @@
-const {Schema, model} = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const plantSchema = new Schema (
     {
-        picture: {
+        common_name: {
             type: String,
-            required: [true, "please insert a plant image"],
+            required: [true, "a name is required"],
         },
-        scientificName: {
+        scientific_name: {
             type: String,
             required: [true, "please insert the scientific name"]
         },
@@ -17,10 +18,13 @@ const plantSchema = new Schema (
         family: {
             type: String,
             enum: ["araceae", "asparagaceae", "polypodiaceae", "pteridaceae", "dryopteridaceae", "asparagaceae", "asphodelaceae", "moraceae", "musaceae", "asteraceae"]
+        },
+        picture_url: {
+            type: String
         }
     }
 )
 
 
 const Plant = model("Plant", plantSchema);
-module.exports = Plant
+module.exports = Plant;
