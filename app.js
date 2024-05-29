@@ -21,9 +21,13 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-//plant general route
+//allPlants general route
 const plantsRouter = require("./routes/plants.routes");
 app.use("/api", plantsRouter);
+
+// allPlantCares general route
+const plantCaresRouter = require("./routes/plantcare.routes");
+app.use("/api", plantCaresRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

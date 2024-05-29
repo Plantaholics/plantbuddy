@@ -18,7 +18,7 @@ const plantCareSchema = new Schema (
             type: String,
             enum: ["morning", "midday", "afternoon", "all day"]
         },
-        preferredArea: {
+        preferred_area: {
             type: String,
             enum: ["only indoor", "only outdoor", "indoor/outdoor", "humid places", "dry places"]
         },

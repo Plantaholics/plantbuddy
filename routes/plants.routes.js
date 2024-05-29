@@ -16,7 +16,7 @@ router.post("/plants", (req, res, next) => {
 });
 
 
-// GET /api/plant - all the plants
+// GET /api/plants - all the plants
 router.get("/plants", (req, res, next) => {
   console.log("this is a plant");
   Plant.find()
