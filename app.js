@@ -9,10 +9,13 @@ require("./db");
 // https://www.npmjs.com/package/express
 const express = require("express");
 
+const { isAuthenticated } = require("./middleware/jwt.middleware");
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-require("./config")(app);
+const config = require("./config");
+config(app);
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
@@ -21,13 +24,13 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-//allPlants general route
+//allPlants general route PROBLEM
 const plantsRouter = require("./routes/plants.routes");
-app.use("/api", plantsRouter);
+app.use("/api", isAuthenticated, plantsRouter);
 
-// allPlantCares general route
+// allPlantCares general route PROBLEMA
 const plantCaresRouter = require("./routes/plantcare.routes");
-app.use("/api", plantCaresRouter);
+app.use("/api", isAuthenticated, plantCaresRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

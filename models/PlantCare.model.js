@@ -21,12 +21,9 @@ const plantCareSchema = new Schema (
         preferred_area: {
             type: String,
             enum: ["only indoor", "only outdoor", "indoor/outdoor", "humid places", "dry places"]
-        },
-        plant: [{
-            type:mongoose.Schema.Types.ObjectId, ref: "Plant"
-        }]
-    }
-)
+        }
+        }
+    )
 
 
 const PlantCare = model("PlantCare", plantCareSchema);

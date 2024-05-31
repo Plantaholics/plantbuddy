@@ -19,9 +19,6 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: [true, "Name is required."],
-    },
-    plantCare: {
-      type:mongoose.Schema.Types.ObjectId, ref: "PlantCare"
     }
   }
 );
