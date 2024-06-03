@@ -16,10 +16,10 @@ router.post("/plantcare", (req, res, next) => {
       .then((newCare) => {
         return Plant.findByIdAndUpdate(plantId, {
           $push: { cares: newCare._id },
-        });
+        }, { new: true });
         })
-        .then((response) => res.json(response))
-    .catch((err) => res.json(err));
+      .then((response) => res.json(response))
+      .catch((err) => res.json(err));
       });
       
 // GET /api/plantCare - all the plantCare
