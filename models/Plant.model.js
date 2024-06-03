@@ -23,8 +23,9 @@ const plantSchema = new Schema (
             type: String
         },
         care: {
-            type:mongoose.Schema.Types.ObjectId, ref: "PlantCare"
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "PlantCare"
+          }
     }
 )
 
