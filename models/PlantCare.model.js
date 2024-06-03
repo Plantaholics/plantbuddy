@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const plantCareSchema = new Schema (
+const CareSchema = new Schema (
     {
         water: {
             type: String,
@@ -30,5 +30,5 @@ const plantCareSchema = new Schema (
     )
 
 
-const PlantCare = model("PlantCare", plantCareSchema);
-module.exports = PlantCare
+const Care = model("PlantCare", CareSchema);
+module.exports = Care

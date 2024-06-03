@@ -7,8 +7,8 @@ const mongoose = require("mongoose");
 const PlantCare = require("../models/PlantCare.model");
 const Plant = require("../models/Plant.model");
 
-//POST /api/plantcare - create a new plantCare
-router.post("/plantcare", (req, res, next) => {
+//POST /api/care - create a new care
+router.post("/care", (req, res, next) => {
     const { water, fertilization, benefits, sunlight, preferred_area, plantId} =
       req.body;
   
@@ -22,24 +22,28 @@ router.post("/plantcare", (req, res, next) => {
       .catch((err) => res.json(err));
       });
       
-// GET /api/plantCare - all the plantCare
-router.get("/plantcare", (req, res, next) => {
-    console.log("this is a plantCare");
+// GET /api/care - all the care  //PROBLEM
+router.get("/care", (req, res, next) => {
     PlantCare.find()
-      .then((allPlantCares) => res.json(allPlantCares))
+      .then((allcares) => res.json(allcares))
       .catch((err) => res.json(err));
   });
 
-  // DELETE /api/plantcare/plandCareIt - deletes speciifc plantCare
-router.delete("/plantcare/:plantcareId", (req, res, next) => {
-    const {plantcareId} = req.params;
+// GET /api/care/:careId - returns specific care
+
+router.get("/care/:careId", (req, res, next) => {
+    const {careId} = req.params;
   
-    PlantCare.findByIdAndDelete(plantcareId)
-    .then((deletedPlantCare)=>res.json({
-      message: `PlantCare with ${plantcareId} has been removed successfully`
-    })
-  )
+    if(!mongoose.Types.ObjectId.isValid(careId)) {
+      res.status(400).json({message: "specified Id is not valid"})
+      return;
+    }
+  
+    PlantCare.findById(careId)
+    .populate("plant")
+    .then((care) => res.status(200).json(care))
     .catch((err) => res.json(err));
   });
+
 
   module.exports = router;
