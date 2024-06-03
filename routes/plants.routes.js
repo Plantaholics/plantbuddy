@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Plant = require("../models/Plant.model");
-const PlantCare = require("../models/PlantCare.model");
+const PlantCare = require("../models/Care.model");
 
 
 
@@ -38,7 +38,7 @@ router.get("/plants/:plantId", (req, res, next)=> {
   }
 
   Plant.findById(plantId)
-  // .populate("care")
+  .populate("care")
   .then((plant) => res.status(200).json(plant))
   .catch((err) => res.json(err));
 });

@@ -24,13 +24,13 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-//allPlants general route PROBLEM
+//allPlants general route 
 const plantsRouter = require("./routes/plants.routes");
 app.use("/api", isAuthenticated, plantsRouter);
 
-// allPlantCares general route PROBLEMA
-const plantCaresRouter = require("./routes/plantcare.routes");
-app.use("/api", isAuthenticated, plantCaresRouter);
+// allPlantCares general route 
+const caresRouter = require("./routes/care.routes");
+app.use("/api", isAuthenticated, caresRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

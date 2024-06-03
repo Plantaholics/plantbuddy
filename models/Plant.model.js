@@ -22,10 +22,10 @@ const plantSchema = new Schema (
         picture_url: {
             type: String
         },
-        cares: [{
+        care: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "PlantCare"
-          }]
+            ref: "Care"
+          }
     }
 )
 

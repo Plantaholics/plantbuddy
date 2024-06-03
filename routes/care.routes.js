@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 
 
-const PlantCare = require("../models/PlantCare.model");
+const Care = require("../models/Care.model");
 const Plant = require("../models/Plant.model");
 
 //POST /api/care - create a new care
@@ -12,10 +12,10 @@ router.post("/care", (req, res, next) => {
     const { water, fertilization, benefits, sunlight, preferred_area, plantId} =
       req.body;
   
-    PlantCare.create({ water, fertilization, benefits, sunlight, preferred_area, plant: plantId })
+    Care.create({ water, fertilization, benefits, sunlight, preferred_area, plant: plantId })
       .then((newCare) => {
         return Plant.findByIdAndUpdate(plantId, {
-          $push: { cares: newCare._id },
+          care: newCare._id 
         }, { new: true });
         })
       .then((response) => res.json(response))
@@ -24,7 +24,7 @@ router.post("/care", (req, res, next) => {
       
 // GET /api/care - all the care  //PROBLEM
 router.get("/care", (req, res, next) => {
-    PlantCare.find()
+    Care.find()
       .then((allcares) => res.json(allcares))
       .catch((err) => res.json(err));
   });
@@ -39,7 +39,7 @@ router.get("/care/:careId", (req, res, next) => {
       return;
     }
   
-    PlantCare.findById(careId)
+    Care.findById(careId)
     .populate("plant")
     .then((care) => res.status(200).json(care))
     .catch((err) => res.json(err));

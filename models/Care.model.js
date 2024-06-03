@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const CareSchema = new Schema (
-    {
+    [{
         water: {
             type: String,
             enum: ["once a day", "once a week", "twice a week", "once every two weeks", "once a month"]
@@ -26,9 +26,9 @@ const CareSchema = new Schema (
             type: mongoose.Schema.Types.ObjectId,
             ref: "Plant"
           }
-        }
+        }]
     )
 
 
-const Care = model("PlantCare", CareSchema);
+const Care = model("Care", CareSchema);
 module.exports = Care
