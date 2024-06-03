@@ -38,7 +38,7 @@ router.get("/plants/:plantId", (req, res, next)=> {
   }
 
   Plant.findById(plantId)
-
+  .populate("care")
   .then((plant) => res.status(200).json(plant))
   .catch((err) => res.json(err));
 });
