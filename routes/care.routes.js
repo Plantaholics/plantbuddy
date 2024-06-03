@@ -45,5 +45,19 @@ router.get("/care/:careId", (req, res, next) => {
     .catch((err) => res.json(err));
   });
 
+  // PUT /api/care/:careId - updates specific care 
+router.put("/care/:careId", (req, res, next) => {
+  const {careId} = req.params;
+
+  if(!mongoose.Types.ObjectId.isValid(careId)) {
+    res.status(400).json({message: "specified Id is not valid"})
+    return;
+  }
+
+  Care.findByIdAndUpdate(careId, req.body, {new: true})
+  .then((updatedCare)=> res.json(updatedCare))
+  .catch((err) => res.json(err));
+});
+
 
   module.exports = router;
