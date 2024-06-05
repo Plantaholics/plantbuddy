@@ -3,7 +3,24 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Plant = require("../models/Plant.model");
-const PlantCare = require("../models/Care.model");
+
+
+
+// **** require fileUploader in order to use it ****
+const fileUploader = require("../config/cloudinary.config");
+
+// POST "/api/upload 
+router.post("/upload", fileUploader.single("picture_url"), (req, res, next) => {
+
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+
+  res.json({ fileUrl: req.file.path });
+});
 
 
 
