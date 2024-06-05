@@ -35,12 +35,7 @@ const plantSchema = new Schema({
   care: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Care",
-  },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
+  }
 });
 
 const Plant = model("Plant", plantSchema);

@@ -5,25 +5,6 @@ const mongoose = require("mongoose");
 const Plant = require("../models/Plant.model");
 
 
-
-// **** require fileUploader in order to use it ****
-const fileUploader = require("../config/cloudinary.config");
-
-// POST "/api/upload 
-router.post("/upload", fileUploader.single("picture_url"), (req, res, next) => {
-
-  if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-
-  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
-
-  res.json({ fileUrl: req.file.path });
-});
-
-
-
 //POST /api/plants - create a new plant
 router.post("/plants", (req, res, next) => {
   const { common_name, scientific_name, origin, family, picture_url } = req.body;

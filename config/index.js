@@ -24,8 +24,9 @@ module.exports = (app) => {
   // controls a very specific header to pass headers from the frontend
   app.use(
     cors({
-      credentials: true,
       origin: ["http://localhost:5173", "http://localhost:5174"],
+      //THIS IS THE CODE THAT NEEDS TO BE UNCOMMENTED FOR THE FINAL VERSION =>
+      // origin: [FRONTEND_URL],
     })
   );
 
