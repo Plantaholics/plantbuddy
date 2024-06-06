@@ -14,6 +14,7 @@ const { isAuthenticated } = require("./middleware/jwt.middleware");
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
+
 const config = require("./config");
 config(app);
 
@@ -31,6 +32,11 @@ app.use("/api", plantsRouter);
 // allPlantCares general route 
 const caresRouter = require("./routes/care.routes");
 app.use("/api", caresRouter);
+
+// Upload image route
+const uploadRoutes = require("./routes/upload.routes");
+app.use("/api", uploadRoutes);
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

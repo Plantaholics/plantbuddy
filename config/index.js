@@ -37,4 +37,7 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+
+  // NEW TRY: to serve the public folder
+  app.use(express.static('public'));
 };
