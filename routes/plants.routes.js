@@ -1,24 +1,61 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const multer = require("multer");
 
 const Plant = require("../models/Plant.model");
 const User = require("../models/User.model"); // Importa el modelo de usuario
 
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
+// Multer configuration + ROUTE for image upload
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+//   });
+
+  const fileUploader = require("../config/cloudinary.config");
+
+// router.post("/upload/file", upload.single("file"), (req, res) => {
+//     if (req.file) {
+//      return res.status(400).send({message: "No file uploaded"});
+//     }
+
+// });
+
+//*************************************************************
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+  // console.log("file is: ", req.file)
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+  
+  res.json({ fileUrl: req.file.path });
+});
+
+
 // POST /api/plants - create a new plant
 router.post("/plants", isAuthenticated, (req, res, next) => {
   const { common_name, scientific_name, origin, family, picture_url } = req.body;
-  const createdBy = req.payload._id; // ID del usuario autenticado
+  const createdBy = req.payload._id; // user's id
 
-  // Verifica si el usuario existe antes de crear la planta
+  // Veifys if the user exists
   User.findById(createdBy)
     .then(user => {
       if (!user) {
         throw new Error('User not found');
       }
-      // Crea la planta asociada al usuario
+      // Creates the plant asociated with the user
       return Plant.create({ common_name, scientific_name, origin, family, picture_url, createdBy });
     })
     .then(plantCreated => res.json(plantCreated))

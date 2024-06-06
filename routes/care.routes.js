@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 
 const Care = require("../models/Care.model");
 const Plant = require("../models/Plant.model");
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //POST /api/care - create a new care
-router.post("/care", (req, res, next) => {
+router.post("/care", isAuthenticated, (req, res, next) => {
     const { water, fertilization, benefits, sunlight, preferred_area, plantId} =
       req.body;
   
@@ -22,7 +23,7 @@ router.post("/care", (req, res, next) => {
       .catch((err) => res.json(err));
       });
       
-// GET /api/care - all the care  //PROBLEM
+// GET /api/care - all the care  
 router.get("/care", (req, res, next) => {
     Care.find()
       .then((allcares) => res.json(allcares))
@@ -46,7 +47,7 @@ router.get("/care/:careId", (req, res, next) => {
   });
 
   // PUT /api/care/:careId - updates specific care 
-router.put("/care/:careId", (req, res, next) => {
+router.put("/care/:careId", isAuthenticated, (req, res, next) => {
   const {careId} = req.params;
 
   if(!mongoose.Types.ObjectId.isValid(careId)) {
