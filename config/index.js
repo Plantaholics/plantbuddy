@@ -23,12 +23,12 @@ module.exports = (app) => {
 
   // controls a very specific header to pass headers from the frontend
   app.use(
-    cors({
-      credentials: true,
-      // origin: [FRONTEND_URL], // THIS IS FOR PRODUCTION
-      origin: ["http://localhost:5173", "http://localhost:5174"], // THIS IS FOR DEVELOPMENT
-    })
-  );
+      cors({
+        credentials: true,
+        origin: [FRONTEND_URL], // THIS IS FOR PRODUCTION
+      //origin: ["http://localhost:5173", "http://localhost:5174"], // THIS IS FOR DEVELOPMENT
+      })
+    );
 
   // In development environment the app logs
   app.use(logger("dev"));
