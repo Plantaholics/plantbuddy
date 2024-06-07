@@ -33,9 +33,9 @@ app.use("/api", plantsRouter);
 const caresRouter = require("./routes/care.routes");
 app.use("/api", caresRouter);
 
-// Upload image route
-const uploadRoutes = require("./routes/upload.routes");
-app.use("/api", uploadRoutes);
+// // Upload image route
+// const uploadRoutes = require("./routes/upload.routes");
+// app.use("/api", uploadRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
