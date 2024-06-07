@@ -11,7 +11,7 @@
 - Instructions to run this app in your computer:
   - git clone
   - You will need to install these dependenceis -  `npm install`, `npm i cloudinary`, `npm i mongoose` 
-  - environment variables: explain that I'd need to create a `.env` file and add environment variables (remember to detail all the variables that I may need to create, if I need to create an account to get some credentials etc.)
+  - environment variables: you will need to create an `.env` file and add environment variables such as origin - https://plantbuddynet.netlify.app
   - you can run the application with `npm run dev`
 
 
