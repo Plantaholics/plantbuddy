@@ -25,7 +25,7 @@ module.exports = (app) => {
   app.use(
     cors({
       credentials: true,
-      origin: [FRONTEND_URL] // THIS IS FOR PRODUCTION
+      origin: [FRONTEND_URL], // THIS IS FOR PRODUCTION
       // origin: ["http://localhost:5173", "http://localhost:5174"], // THIS IS FOR DEVELOPMENT
     })
   );
@@ -39,5 +39,5 @@ module.exports = (app) => {
   app.use(cookieParser());
 
   // NEW TRY: to serve the public folder
-  app.use(express.static('public'));
+  app.use(express.static("public"));
 };
